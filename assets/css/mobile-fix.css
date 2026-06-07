@@ -1,0 +1,1137 @@
+/* ============================================================
+   SAHAJANAND Healthcare Clinic - Mobile Responsive Fix
+   Dr. Milan Thakkar | milanthakkar17@gmail.com |7874108999
+   ============================================================ */
+
+/* ---- BASE FIXES ---- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ============================================================
+   LOGO FIX - ALL PAGES (Desktop + Mobile)
+   The logo image (image.png) is very wide; we constrain it
+   using max-height so it fits neatly in the navbar header.
+   ============================================================ */
+
+/* --- DESKTOP LOGO (index.html header-lower logo) --- */
+.main-header .logo-box figure img,
+.main-header figure.logo img,
+.main-header .logo img,
+.header-lower .logo img,
+.header-lower figure.logo img,
+.outer-box figure.logo img {
+  max-height: 70px !important;
+  width: auto !important;
+  max-width: none !important;
+  display: block;
+}
+
+/* --- LOGO BOX padding reset so logo doesn't push header too tall --- */
+.main-header .logo-box {
+  padding: 10px 0 !important;
+}
+
+/* --- STICKY HEADER LOGO --- */
+.sticky-header .logo-box figure img,
+.sticky-header figure.logo img,
+.sticky-header .logo img {
+  max-height: 55px !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
+/* --- MOBILE MENU NAV LOGO --- */
+.mobile-menu .nav-logo a img,
+.mobile-menu .nav-logo img {
+  max-height: 50px !important;
+  width: auto !important;
+  max-width: 100% !important;
+}
+
+/* --- SIDEBAR LOGO (info-sidebar) --- */
+.xs-sidebar-group .logo img,
+.sidebar-info-contents .logo img {
+  max-height: 60px !important;
+  width: auto !important;
+  max-width: 100% !important;
+}
+
+/* --- FOOTER LOGO (if shown) --- */
+.main-footer .footer-logo img {
+  max-height: 55px !important;
+  width: auto !important;
+}
+
+/* --- TABLET: 991px and below --- */
+@media only screen and (max-width: 991px) {
+  .main-header .logo-box figure img,
+  .main-header figure.logo img,
+  .main-header .logo img,
+  .header-lower .logo img,
+  .header-lower figure.logo img,
+  .outer-box figure.logo img {
+    max-height: 60px !important;
+  }
+}
+
+/* --- MOBILE: 767px and below --- */
+@media only screen and (max-width: 767px) {
+  .main-header .logo-box figure img,
+  .main-header figure.logo img,
+  .main-header .logo img,
+  .header-lower .logo img,
+  .header-lower figure.logo img,
+  .outer-box figure.logo img {
+    max-height: 48px !important;
+  }
+
+  .main-header .logo-box {
+    padding: 8px 0 !important;
+  }
+}
+
+/* --- SMALL MOBILE: 480px and below --- */
+@media only screen and (max-width: 480px) {
+  .main-header .logo-box figure img,
+  .main-header figure.logo img,
+  .main-header .logo img,
+  .header-lower .logo img,
+  .header-lower figure.logo img,
+  .outer-box figure.logo img {
+    max-height: 40px !important;
+  }
+}
+
+/* --- VERY SMALL: 360px and below --- */
+@media only screen and (max-width: 360px) {
+  .main-header .logo-box figure img,
+  .main-header figure.logo img,
+  .main-header .logo img,
+  .header-lower .logo img,
+  .header-lower figure.logo img,
+  .outer-box figure.logo img {
+    max-height: 34px !important;
+  }
+}
+
+/* ============================================================
+   HEADER LAYOUT FIX - Prevent header from becoming too tall
+   ============================================================ */
+.main-header .header-lower {
+  min-height: unset;
+}
+
+.main-header .outer-box {
+  align-items: center;
+  min-height: 80px;
+}
+
+/* Fix desktop header padding so logo+menu align well */
+@media only screen and (min-width: 1200px) {
+  .main-header .header-lower {
+    padding: 0 80px !important;
+  }
+
+  .main-header .logo-box {
+    padding: 12px 0 !important;
+  }
+}
+
+/* ---- NAVIGATION MOBILE FIX ---- */
+.main-header .header-lower .outer-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.mobile-nav-toggler {
+  cursor: pointer;
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  z-index: 999;
+}
+
+.mobile-nav-toggler .icon-bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: #1a1a1a;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 300px;
+  height: 100%;
+  background: #fff;
+  z-index: 99999;
+  overflow-y: auto;
+  transition: left 0.3s ease;
+  box-shadow: 5px 0 20px rgba(0,0,0,0.15);
+}
+
+.mobile-menu.mobile-menu-visible {
+  left: 0;
+}
+
+.mobile-menu .menu-backdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-visible .menu-backdrop {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu .close-btn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.mobile-menu .close-btn:hover {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.mobile-menu .nav-logo {
+  padding: 20px 20px 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-menu .nav-logo img {
+  max-height: 60px;
+  width: auto;
+}
+
+.mobile-menu .menu-outer {
+  padding: 10px 0;
+}
+
+.mobile-menu .menu-outer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-menu .menu-outer ul li a {
+  display: block;
+  padding: 12px 20px;
+  color: #333;
+  font-size: 15px;
+  font-weight: 500;
+  border-bottom: 1px solid #f5f5f5;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.mobile-menu .menu-outer ul li a:hover,
+.mobile-menu .menu-outer ul li.current a {
+  color: #c0392b;
+  padding-left: 30px;
+}
+
+.mobile-menu .contact-info {
+  padding: 20px;
+  background: #f9f9f9;
+  margin-top: 10px;
+}
+
+.mobile-menu .contact-info h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.mobile-menu .contact-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-menu .contact-info ul li {
+  padding: 6px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.mobile-menu .contact-info ul li a {
+  color: #555;
+  text-decoration: none;
+}
+
+/* ---- BANNER SECTION MOBILE ---- */
+.banner-section .slide-item {
+  min-height: 450px;
+}
+
+.banner-section .content-box h2 {
+  font-size: clamp(24px, 5vw, 56px);
+  line-height: 1.3;
+}
+
+.banner-section .content-box p {
+  font-size: clamp(14px, 2.5vw, 18px);
+}
+
+/* ---- APPOINTMENT SECTION MOBILE ---- */
+.appointment-section .inner-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.appointment-section .form-inner form .row {
+  margin: 0 -10px;
+}
+
+.appointment-section .form-inner form .form-group {
+  padding: 0 10px;
+}
+
+/* ---- ABOUT SECTION MOBILE ---- */
+.about-section .content-box {
+  margin-left: 0 !important;
+}
+
+/* ---- SERVICE SECTION ---- */
+.service-block-one .inner-box {
+  padding: 30px 20px;
+}
+
+/* ---- GALLERY SECTION ---- */
+.gallery-section .gallery-block-one .inner-box {
+  height: 220px;
+}
+
+.gallery-section .gallery-block-one .image-box {
+  height: 100%;
+}
+
+.gallery-section .gallery-block-one .image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---- FOOTER ---- */
+.main-footer .footer-widget {
+  margin-bottom: 30px;
+}
+
+.main-footer .links-widget {
+  margin-left: 0 !important;
+}
+
+/* ---- SECTION TITLES ---- */
+.sec-title h2 {
+  word-break: break-word;
+}
+
+/* ============================================================
+   TABLET (max-width: 991px)
+   ============================================================ */
+@media only screen and (max-width: 991px) {
+
+  /* Header */
+  .main-header .header-lower .outer-box {
+    flex-wrap: nowrap;
+    padding: 0 15px;
+  }
+
+  .main-header .menu-area {
+    flex: 1;
+  }
+
+  .mobile-nav-toggler {
+    display: flex !important;
+  }
+
+  .main-menu {
+    display: none !important;
+  }
+
+  .sticky-header {
+    display: none !important;
+  }
+
+  /* Banner */
+  .banner-section .slide-item {
+    min-height: 380px;
+  }
+
+  .banner-section .content-box {
+    padding: 40px 20px;
+  }
+
+  /* Appointment section */
+  .appointment-section .schedule-column {
+    margin-top: 30px;
+  }
+
+  /* About section */
+  .about-section .content-column .content-box {
+    margin-left: 0 !important;
+    padding: 30px 15px;
+  }
+
+  /* Surgery tabs */
+  .surgeries-section .tab-btn-box ul {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .surgeries-section .tab-btn-box ul li {
+    flex: 1 1 45%;
+  }
+
+  /* History section */
+  .history-section .content-box {
+    padding-right: 0;
+  }
+
+  /* Footer columns stacking */
+  .main-footer .links-widget {
+    margin-left: 0 !important;
+  }
+
+  .main-footer .schedule-widget .schedule-list li {
+    font-size: 14px;
+  }
+}
+
+/* ============================================================
+   MOBILE LANDSCAPE (max-width: 767px)
+   ============================================================ */
+@media only screen and (max-width: 767px) {
+
+  /* Prevent horizontal scroll */
+  .boxed_wrapper {
+    overflow-x: hidden;
+  }
+
+  /* Header */
+  .main-header .header-lower {
+    padding: 12px 15px !important;
+  }
+
+  .main-header .logo-box figure img,
+  .main-header .logo img {
+    max-height: 55px;
+    width: auto;
+  }
+
+  .main-header .menu-right-content .support-box {
+    display: none !important;
+  }
+
+  /* Banner */
+  .banner-section .slide-item {
+    min-height: 320px;
+  }
+
+  .banner-section .content-box h2 {
+    font-size: 26px;
+    line-height: 1.3;
+  }
+
+  .banner-section .content-box p {
+    font-size: 14px;
+  }
+
+  /* Section titles */
+  .sec-title h2 {
+    font-size: 28px !important;
+    line-height: 1.35 !important;
+  }
+
+  .sec-title p {
+    font-size: 14px;
+  }
+
+  /* About section images */
+  .about-section .image-column {
+    margin-bottom: 30px;
+  }
+
+  .about-section .content-column .content-box {
+    margin-left: 0 !important;
+  }
+
+  /* Appointment section */
+  .appointment-section .inner-box {
+    padding: 25px 15px;
+  }
+
+  .appointment-section .inner-box h4 {
+    font-size: 20px;
+  }
+
+  /* Form groups full width on small screens */
+  .appointment-section .col-lg-6.form-group,
+  .appointment-style-two .col-lg-6 {
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Services */
+  .service-section .col-lg-4 {
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  .service-block-one .inner-box {
+    margin-bottom: 20px;
+  }
+
+  /* Surgery tabs */
+  .surgeries-section .tab-btn-box ul li {
+    flex: 1 1 100%;
+  }
+
+  /* Choose us section */
+  .chooseus-section .image-column {
+    margin-bottom: 30px;
+  }
+
+  /* Contact info cards */
+  .contact-info-section .col-lg-4 {
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 20px;
+  }
+
+  /* Appointment image */
+  .appointment-style-two .image-column {
+    margin-bottom: 25px;
+  }
+
+  /* History blocks */
+  .history-section .history-block-one {
+    margin-bottom: 20px;
+  }
+
+  /* Gallery */
+  .gallery-section .gallery-carousel {
+    padding: 0 10px;
+  }
+
+  /* Footer */
+  .main-footer .footer-column {
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    text-align: center;
+  }
+
+  .main-footer .links-widget .links-list {
+    text-align: center;
+  }
+
+  .main-footer .schedule-widget .schedule-list li {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 8px 0;
+  }
+
+  .footer-bottom .bottom-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .footer-bottom .bottom-inner .social-links {
+    justify-content: center;
+  }
+
+  /* Page title */
+  .page-title .content-box h1 {
+    font-size: 32px;
+  }
+
+  /* Scroll to top */
+  .scroll-to-top {
+    right: 15px;
+    bottom: 15px;
+  }
+
+  /* Sidebar info */
+  .xs-sidebar-group .xs-sidebar-widget {
+    width: 85vw;
+  }
+
+  /* Map */
+  .google-map-section iframe {
+    height: 300px;
+  }
+
+  /* Inner box image in about section */
+  .about-section .inner-box {
+    flex-direction: column;
+  }
+
+  .about-section .inner-box .image {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  .about-section .inner-box .image img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+/* ============================================================
+   MOBILE PORTRAIT (max-width: 480px)
+   ============================================================ */
+@media only screen and (max-width: 480px) {
+
+  /* Mobile menu full width */
+  .mobile-menu {
+    width: 100%;
+  }
+
+  /* Header */
+  .main-header .header-lower {
+    padding: 10px 12px !important;
+  }
+
+  .main-header .logo-box figure img,
+  .main-header .logo img {
+    max-height: 45px;
+  }
+
+  /* Banner */
+  .banner-section .slide-item {
+    min-height: 280px;
+  }
+
+  .banner-section .content-box h2 {
+    font-size: 22px;
+  }
+
+  .banner-section .content-box p {
+    font-size: 13px;
+  }
+
+  /* Section titles */
+  .sec-title h2 {
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Buttons */
+  .theme-btn.btn-one,
+  .theme-btn.btn-two {
+    padding: 12px 25px;
+    font-size: 14px;
+  }
+
+  /* History blocks */
+  .history-section .col-lg-6 {
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* About section experience badge */
+  .about-section .experience-box {
+    right: -5px;
+    bottom: -5px;
+    padding: 12px 15px;
+  }
+
+  .about-section .experience-box h2 {
+    font-size: 36px;
+  }
+
+  /* Page title */
+  .page-title .content-box h1 {
+    font-size: 26px;
+  }
+
+  .page-title .bread-crumb li {
+    font-size: 13px;
+  }
+
+  /* Contact info */
+  .contact-info-section .info-block-one .inner-box {
+    padding: 25px 15px;
+  }
+
+  /* Form inputs */
+  .appointment-style-two input,
+  .appointment-style-two select,
+  .appointment-section input,
+  .appointment-section select {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  /* Footer */
+  .main-footer .info-list li {
+    font-size: 13px;
+  }
+
+  /* Google Map */
+  .google-map-section iframe {
+    height: 250px;
+  }
+}
+
+/* ============================================================
+   SMALL MOBILE (max-width: 360px)
+   ============================================================ */
+@media only screen and (max-width: 360px) {
+
+  .main-header .logo-box figure img,
+  .main-header .logo img {
+    max-height: 38px;
+  }
+
+  .banner-section .content-box h2 {
+    font-size: 19px;
+  }
+
+  .sec-title h2 {
+    font-size: 21px !important;
+  }
+
+  .theme-btn.btn-one,
+  .theme-btn.btn-two {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}
+
+/* ============================================================
+   UTILITIES - Fix overflows globally
+   ============================================================ */
+.auto-container {
+  max-width: 100%;
+  padding: 0 15px;
+}
+
+.outer-container {
+  max-width: 100%;
+  padding: 0 15px;
+}
+
+/* Fix section padding on mobile */
+@media only screen and (max-width: 767px) {
+  .pt_120 { padding-top: 60px !important; }
+  .pb_120 { padding-bottom: 60px !important; }
+  .pt_110 { padding-top: 55px !important; }
+  .pb_110 { padding-bottom: 55px !important; }
+  .pt_90  { padding-top: 45px !important; }
+  .pb_90  { padding-bottom: 45px !important; }
+  .mb_60  { margin-bottom: 30px !important; }
+  .mb_50  { margin-bottom: 25px !important; }
+  .mb_40  { margin-bottom: 20px !important; }
+  .ml_80  { margin-left: 0 !important; }
+  .ml_60  { margin-left: 0 !important; }
+  .mr_40  { margin-right: 0 !important; }
+  .pr_30  { padding-right: 0 !important; }
+}
+
+/* Fix image responsiveness */
+figure img,
+.image img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Fix About page chooseus section tag typo (closing tag was </section>x`) */
+/* This is purely structural - the CSS can still target the section normally */
+
+/* ============================================================
+   ABOUT PAGE - Additional chooseus section fixes
+   ============================================================ */
+.chooseus-section .image_block_two .image-box {
+  position: relative;
+}
+
+@media only screen and (max-width: 991px) {
+  .chooseus-section .image-column {
+    margin-bottom: 40px;
+  }
+
+  .chooseus-section .content-box {
+    padding: 0 15px;
+  }
+}
+
+/* ============================================================
+   CONTACT PAGE FIXES
+   ============================================================ */
+.appointment-style-two .image-box img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Appointment form full-width submit button */
+.appointment-style-two .message-btn {
+  text-align: center;
+}
+
+/* ============================================================
+   GALLERY SECTION - Hospital Images Fix
+   ============================================================ */
+.gallery-section .gallery-block-one .inner-box {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.gallery-section .gallery-block-one .image-box {
+  display: block;
+  height: 300px;
+  overflow: hidden;
+}
+
+.gallery-section .gallery-block-one .image-box img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.gallery-section .gallery-block-one .inner-box:hover .image-box img {
+  transform: scale(1.05);
+}
+
+@media only screen and (max-width: 767px) {
+  .gallery-section .gallery-block-one .image-box {
+    height: 220px;
+  }
+}
+
+/* ============================================================
+   LOGO LEFT-ALIGN FIX (Desktop)
+   Ensure logo stays left with no unwanted padding pushing it right
+   ============================================================ */
+.main-header .header-lower .outer-container {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.main-header .logo-box {
+  flex-shrink: 0;
+}
+
+.main-header figure.logo {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* About section images - use hospital photos properly */
+.about-section .image_block_one .image-box figure.image img,
+.about-section .inner-box figure.image img {
+  width: 100% !important;
+  max-width: none !important;
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+
+
+/* ============================================================
+   WHATSAPP FLOATING BUTTON
+   ============================================================ */
+.whatsapp-float {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: pulse-whatsapp 2s infinite;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+}
+
+.whatsapp-float i {
+  color: #fff;
+  font-size: 28px;
+}
+
+@keyframes pulse-whatsapp {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+  70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* ============================================================
+   CALL FLOATING BUTTON
+   ============================================================ */
+.call-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  background: #c0392b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  box-shadow: 0 4px 15px rgba(192, 57, 43, 0.4);
+  text-decoration: none;
+  transition: transform 0.3s ease;
+  animation: pulse-call 2.5s infinite;
+}
+
+.call-float:hover {
+  transform: scale(1.1);
+}
+
+.call-float i {
+  color: #fff;
+  font-size: 22px;
+}
+
+@keyframes pulse-call {
+  0% { box-shadow: 0 0 0 0 rgba(192, 57, 43, 0.5); }
+  70% { box-shadow: 0 0 0 12px rgba(192, 57, 43, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(192, 57, 43, 0); }
+}
+
+/* ============================================================
+   MOBILE NAV - JS powered visibility
+   ============================================================ */
+@media only screen and (max-width: 1200px) {
+  .mobile-nav-toggler {
+    display: flex !important;
+  }
+
+  .main-menu {
+    display: none !important;
+  }
+}
+
+/* ============================================================
+   MOBILE MENU - FULL WHITE THEME
+   ============================================================ */
+.mobile-menu .menu-box {
+  background: #ffffff !important;
+}
+
+.mobile-menu .close-btn {
+  color: #0F0F0F !important;
+  background: #f1f1f1 !important;
+  border: 1px solid #e1e1e1 !important;
+}
+.mobile-menu .close-btn:hover {
+  background: #F92D47 !important;
+  color: #fff !important;
+  border-color: #F92D47 !important;
+}
+
+.mobile-menu .menu-box .nav-logo {
+  border-bottom: 1px solid #f1f1f1 !important;
+  padding-bottom: 20px;
+}
+
+.mobile-menu .navigation > li {
+  border-bottom: 1px solid #f1f1f1 !important;
+}
+
+.mobile-menu .navigation > li > a {
+  color: #0F0F0F !important;
+  font-weight: 600;
+}
+
+.mobile-menu .navigation > li.current > a,
+.mobile-menu .navigation > li > a:hover {
+  color: #F92D47 !important;
+}
+
+.mobile-menu .contact-info {
+  background: #ffffff !important;
+}
+
+.mobile-menu .contact-info h4 {
+  color: #0F0F0F !important;
+  border-bottom: 1px solid #f1f1f1 !important;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.mobile-menu .contact-info ul li {
+  color: #555555 !important;
+}
+
+.mobile-menu .contact-info ul li a {
+  color: #555555 !important;
+}
+
+.mobile-menu .contact-info ul li a:hover {
+  color: #F92D47 !important;
+}
+
+/* ============================================================
+   PREMIUM GLOBAL DESIGN UPGRADES
+   ============================================================ */
+
+/* Premium Centered Service Blocks */
+.service-block-one .inner-box {
+  text-align: center;
+  padding: 40px 30px;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.02);
+  border-bottom: 3px solid transparent;
+}
+
+.service-block-one .inner-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  border-bottom-color: #F92D47;
+}
+
+.service-block-one .inner-box .icon-box {
+  width: 80px;
+  height: 80px;
+  background: rgba(249, 45, 71, 0.06);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  transition: all 0.4s ease;
+}
+
+.service-block-one .inner-box .icon-box i {
+  color: #F92D47;
+  font-size: 36px;
+  transition: all 0.4s ease;
+}
+
+.service-block-one .inner-box:hover .icon-box {
+  background: #F92D47;
+  transform: scale(1.1);
+}
+
+.service-block-one .inner-box:hover .icon-box i {
+  color: #ffffff;
+}
+
+.service-block-one .inner-box h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #111;
+  letter-spacing: -0.5px;
+}
+
+.service-block-one .inner-box p {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Button Enhancements */
+.theme-btn.btn-one {
+  border-radius: 50px !important;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 25px rgba(249, 45, 71, 0.3);
+  transition: all 0.4s ease;
+}
+
+.theme-btn.btn-one:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(249, 45, 71, 0.4);
+}
+
+/* Tab buttons for Services */
+.testing-tab-btns .p-tab-btn {
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.testing-tab-btns .p-tab-btn:hover {
+  background-color: rgba(249, 45, 71, 0.05);
+}
+
+/* Form Input Styling for Contact Page & Appointment */
+input[type="text"], input[type="email"], select, textarea {
+  border-radius: 8px !important;
+  border: 1px solid #e5e5e5 !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.01) !important;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, select:focus, textarea:focus {
+  border-color: #F92D47 !important;
+  box-shadow: 0 5px 20px rgba(249, 45, 71, 0.1) !important;
+  outline: none;
+}
+
+/* Refined Typography Polish */
+h2, h3, h4 {
+  letter-spacing: -0.5px;
+}
